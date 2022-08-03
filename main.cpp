@@ -41,19 +41,5 @@ int main()
     cout << endl;
     merkle->print_merkle_leaves();
 
-    // vector<string>::iterator j;
-    // for (j = merkle->leaves.begin(); j != merkle->leaves.end(); j++)
-    // {
-    //     cout << *j << " ";
-    // }
-    // cout << endl;
-
-    // for(int k=1; k < merkle->leaves.size(); k+=2)
-    // {
-    //     cout << sha1(merkle->leaves.at(k-1)+merkle->leaves.at(k)) << " ";
-    // }
-    // cout << endl;
-    
-    // cout << sha1("b9c05e18af644d9165a856b42076bfdfb00fb05aba8f830721e9d638e55fd68191414dfed2cf094e") << endl;
     return 0;
 }
