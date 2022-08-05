@@ -21,11 +21,19 @@ public:
 
     // Methods
     bool is_empty();
-    string *hashed_data(string s1, string s2);
     void print_merkle_tree();
     void create_merkle_tree();
     void print_merkle_leaves();
     void print_merkle_child_nodes();
     void add_data_block(string *blocks);
 };
+
+class MerkleProof
+{
+    public:
+        MerkleProof();
+        bool verify();
+};
+
+bool verify(string merkle_branch, string root, string check, int index);
 #endif

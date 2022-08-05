@@ -41,5 +41,17 @@ int main()
     cout << endl;
     merkle->print_merkle_leaves();
 
+    string r = "56ffcf48b462b48e3002c9feb0fdd8fec377e531";
+    string c = "9d718ee01e5e390f729ab893b4aaafc6817e6a79";
+    int idx = 6;
+
+    vector<vector<string>> tree = merkle->merkle_tree;
+
+    bool check = verify(tree, r, c, idx);
+
+    // cout << "Verify: " << check << endl;
+
+    cout << "Log2: " << (log2(merkle->merkle_tree.size() + 1) - floor(log2(merkle->merkle_tree.size() + 1)) > 0) << endl;
+
     return 0;
 }
