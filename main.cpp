@@ -50,8 +50,5 @@ int main()
     bool check = verify(tree, r, c, idx);
 
     // cout << "Verify: " << check << endl;
-
-    cout << "Log2: " << (log2(merkle->merkle_tree.size() + 1) - floor(log2(merkle->merkle_tree.size() + 1)) > 0) << endl;
-
     return 0;
 }

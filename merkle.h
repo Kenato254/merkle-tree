@@ -54,22 +54,23 @@ void MerkleTree::create_merkle_tree()
 {
     // To create a merkle tree, length of leaves should always be 2^n
     bool length_check = (log2(this->leaves.size()) - floor(log2(this->leaves.size()))) > 0;
-    if (!length_check) 
+    if (!length_check)
     {
         this->merkle_tree.push_back(this->leaves); // Add leaves to the tree
-        int index = 0; 
-        int cycles = log2(this->leaves.size()); 
-        while (cycles > index) 
+        int index = 0;
+        int cycles = log2(this->leaves.size());
+        while (cycles > index)
         {
             // Create a vector
             vector<string> anynomous;
             for (int i = 1; i < this->merkle_tree.at(index).size(); i += 2)
             {
-                // Push node to the vector
+                // Push nodes to the vector
                 anynomous.push_back(sha1(this->merkle_tree.at(index).at(i - 1) + this->merkle_tree.at(index).at(i)));
             }
+            // Push vector(child node) to the tree
             this->merkle_tree.push_back(anynomous);
-            anynomous.clear();
+            anynomous.clear(); // Clear vector for reuse;
             index++;
         }
     }
@@ -84,15 +85,15 @@ void MerkleTree::create_merkle_tree()
 
 void MerkleTree::print_merkle_tree()
 /**
- * @brief Print the entire merkle tree from leaves to the root
+ * @brief Print the entire merkle tree from leaves to the root. Time: O(n log n)
  * @return NULL
  */
 {
     if (!this->merkle_tree.empty())
     {
-        for (vector<string> v1d : this->merkle_tree)
+        for (vector<string> v1d : this->merkle_tree) // first dimension
         {
-            for (string v : v1d)
+            for (string v : v1d) // second dimension
             {
                 cout << v << " ";
             }
@@ -142,41 +143,4 @@ void MerkleTree::print_merkle_child_nodes()
         }
         cout << endl;
     }
-}
-
-bool verify(vector<vector<string>> merkle_tree, string root, string data, int index)
-/**
- * @brief function verifies existence of data in the merkle tree
- * @param merkle_branch an array of leaves and nodes needed to computer the merkle tree
- * @param root hash the root of the merkle tree
- * @param data to authenticate
- * @param index of data in the leaves/block
- */
-{
-    string hashed_data = sha1(data);
-    string computed_root;
-    // Computer merkle tree
-    // for (int i = 0, j = 0; i < merkle_tree.size(); i++)
-    // {
-    //     if (index % 2 == 0)
-    //     {
-    //         computed_root = sha1(hashed_data + merkle_tree.at(j).at(i));
-    //         j++;
-    //     } else {
-    //         computed_root = sha1(merkle_tree.at(j).at(i) + hashed_data);
-    //         j++;
-    //     }
-    // }
-    int cycles = log2(merkle_tree.size()); // Number of loops
-    while (cycles > 0)
-    {
-        if (index % 2 == 0)
-        {
-            // computed_root = sha1(hashed_data + merkle_tree.at(cycles).at(i));
-        } else {
-            // computed_root = sha1(merkle_tree.at(cycles).at(i) + hashed_data);
-        }
-        cycles--;
-    }
-    return root == computed_root;
 }
