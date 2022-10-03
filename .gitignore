@@ -34,4 +34,4 @@
 # Local
 /Merkle-CPP-Tree
 /SHA-1
-/merkle-tree/verify.h
+verify.h
