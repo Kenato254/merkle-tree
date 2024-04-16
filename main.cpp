@@ -21,7 +21,6 @@ int main()
         "John got paid $40 by Yu",
         "Lin paid $20 to Yu",
         "Bob paid $25 to John",
-        // "Jane paid $5000 to Kassa",
     };
 
     // Add transactions(data blocks) to the merkle tree
@@ -49,6 +48,6 @@ int main()
 
     bool check = verify(tree, r, c, idx);
 
-    // cout << "Verify: " << check << endl;
+    cout << "Verify: " << check << endl;
     return 0;
 }
